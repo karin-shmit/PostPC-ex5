@@ -60,7 +60,7 @@ public class TodoItemsHolderImpl implements TodoItemsHolder {
     Collections.sort(this.todoItems, (item1, item2) ->{
 
       if (item1.getIsDone() == item2.getIsDone()){
-        return Long.compare(item2.getCreationTimestamp(),item1.getCreationTimestamp());
+        return Integer.compare(item2.getTaskId(),item1.getTaskId());
       }
       if (item1.getIsDone()){
         return 1;

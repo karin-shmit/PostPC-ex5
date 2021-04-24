@@ -4,17 +4,23 @@ import java.io.Serializable;
 import java.util.Date;
 
 public class TodoItem implements Serializable {
-    private static long id = 0;
+    private static int id = 0;
+    private int taskId;
     private String task;
     private boolean isDone;
-    private final long creation_timestamp;
+    private long creation_timestamp;
     private long edit_timestamp;
 
     public TodoItem(String taskDesc){
         this.task = taskDesc;
         this.isDone = false;
-        this.creation_timestamp = id++;
+        this.taskId = id++;
+        this.creation_timestamp = new Date().getTime();
         this.edit_timestamp = new Date().getTime();
+    }
+
+    public int getTaskId(){
+        return this.taskId;
     }
 
     public String getTaskDescription(){
