@@ -38,9 +38,6 @@ public class TodoItemsHolderImpl implements TodoItemsHolder {
     }
     TodoItem item = this.todoItems.get(index);
     item.setIfDone(true);
-//    if (!item.getIsDone()){
-//      item.setIfDone(true);
-//    }
     this.sortList();
   }
 
@@ -51,9 +48,6 @@ public class TodoItemsHolderImpl implements TodoItemsHolder {
     }
     TodoItem item = this.todoItems.get(index);
     item.setIfDone(false);
-//    if (item.getIsDone()){
-//      item.setIfDone(false);
-//    }
     this.sortList();
   }
 
