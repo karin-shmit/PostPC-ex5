@@ -1,10 +1,10 @@
 package exercise.android.reemh.todo_items;
 
+import java.io.Serializable;
 import java.util.List;
 
 
-// TODO: feel free to add/change/remove methods as you want
-public interface TodoItemsHolder {
+public interface TodoItemsHolder extends Serializable {
 
   /** Get a copy of the current items list */
   List<TodoItem> getCurrentItems();
@@ -16,10 +16,10 @@ public interface TodoItemsHolder {
   void addNewInProgressItem(String description);
 
   /** mark the @param item as DONE */
-  void markItemDone(TodoItem item);
+  void markItemDone(int index);
 
   /** mark the @param item as IN-PROGRESS */
-  void markItemInProgress(TodoItem item);
+  void markItemInProgress(int index);
 
   /** delete the @param item */
   void deleteItem(TodoItem item);
