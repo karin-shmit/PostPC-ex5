@@ -8,15 +8,15 @@ public class TodoItem implements Serializable {
     private int taskId;
     private String task;
     private boolean isDone;
-    private long creation_timestamp;
-    private long edit_timestamp;
+    private Date creation_timestamp;
+    private Date edit_timestamp;
 
     public TodoItem(String taskDesc){
         this.task = taskDesc;
         this.isDone = false;
         this.taskId = id++;
-        this.creation_timestamp = new Date().getTime();
-        this.edit_timestamp = new Date().getTime();
+        this.creation_timestamp = new Date();
+        this.edit_timestamp = new Date();
     }
 
     public int getTaskId(){
@@ -31,20 +31,24 @@ public class TodoItem implements Serializable {
         return this.isDone;
     }
 
-    public long getCreationTimestamp(){
+    public Date getCreationTimestamp(){
         return this.creation_timestamp;
+    }
+
+    public Date getLastModifiedTimestamp() {
+        return this.edit_timestamp;
     }
 
     public void setIfDone(boolean done){
         if (this.isDone != done){
-            this.edit_timestamp = new Date().getTime();
+            this.edit_timestamp = new Date();
         }
         this.isDone = done;
     }
 
     public void setTask(String description){
         if (!this.task.equals(description)){
-            this.edit_timestamp = new Date().getTime();
+            this.edit_timestamp = new Date();
         }
         this.task = description;
     }

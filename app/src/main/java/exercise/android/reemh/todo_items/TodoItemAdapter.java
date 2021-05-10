@@ -1,6 +1,7 @@
 package exercise.android.reemh.todo_items;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,22 +28,24 @@ class TodoItemViewHolder extends RecyclerView.ViewHolder{
 
 public class TodoItemAdapter extends RecyclerView.Adapter<TodoItemViewHolder>{
     private TodoItemsHolder itemHolder;
-    private boolean isBind;
+    Context context;
+    LayoutInflater inflater;
 
-    public TodoItemAdapter(TodoItemsHolder itemHolder){
+    public TodoItemAdapter(TodoItemsHolder itemHolder, Context context){
         this.itemHolder = itemHolder;
+        this.context = context;
+        this.inflater = LayoutInflater.from(context);
     }
 
     @NonNull
     @Override
     public TodoItemViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.row_todo_item, parent, false);
+        View view = this.inflater.inflate(R.layout.row_todo_item, parent, false);
         return new TodoItemViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull TodoItemViewHolder holder, int position) {
-        this.isBind = true;
         TodoItem curItem = this.itemHolder.getCurrentItems().get(position);
         holder.taskDescription.setText(curItem.getTaskDescription());
         holder.checkBox.setChecked(curItem.getIsDone());
@@ -60,6 +63,12 @@ public class TodoItemAdapter extends RecyclerView.Adapter<TodoItemViewHolder>{
                     notifyDataSetChanged();
                 }
             }
+        });
+
+        holder.taskDescription.setOnClickListener(view ->{
+            Intent editIntent = new Intent(this.context, EditScreenActivity.class);
+            editIntent.putExtra("Item", curItem);
+            this.context.startActivity(editIntent);
         });
 
 

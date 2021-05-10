@@ -69,4 +69,19 @@ public class TodoItemsHolderImpl implements TodoItemsHolder {
     });
   }
 
+  @Override
+  public void editItem(TodoItem item){
+    for (int i=0; i<todoItems.size(); i++){
+      if (todoItems.get(i).getCreationTimestamp().equals(item.getCreationTimestamp())){
+        this.todoItems.set(i,item);
+      }
+    }
+    sortList();
+  }
+
+  @Override
+  public void setItems(List<TodoItem> items){
+    this.todoItems = items;
+  }
+
 }
